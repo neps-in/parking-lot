@@ -102,18 +102,22 @@ class Level():
 
     # Try unparking in the level
     def un_park(self, vehicle):
-        print("Level.unpark vehicle " )
-        for spot in self.spots:
-            if vehicle.reg == spot.getVehicle().reg:
-                if spot.getVehicle() == vehicle:
-                    return spot.un_park()
+        print("Level.unpark Trying unpark vehicle in level number " , self.level_num )
+        for spot in self.parkingspots:
+            print( ' vehicle in spot ', spot.__str__() )
+            if spot.getVehicle() is not None :
+                print("spot.getveh is not empty")
+                if vehicle.reg == spot.getVehicle().reg:
+                    print('veh reg match veh.reg == spot.veh.reg UNPARKING SUCCESS' , vehicle.reg, spot.getVehicle().reg)
+                    if spot.getVehicle() == vehicle:
+                        return spot.un_park()
             #         return True
             # return False
 
     # Get Spots
     def get_spots(self):
             all_vehicles = []
-            for spot in self.spots:
+            for spot in self.parkingspots:
                 vehicle = spot.getVehicle()
                 if (vehicle is not None) :
                     all_vehicles.append(vehicle)
@@ -190,5 +194,7 @@ if __name__ == '__main__':
     pk.park(Car("Yello", 20))
     pk.park(Car("White", 22))
 
+    print("UNPARKING ------------------------------------------------------")
     pk.un_park(Car("",10))
-   
+    pk.un_park(Car("", 20))
+
